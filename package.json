@@ -1,0 +1,25 @@
+{
+  "name": "o-rpg",
+  "version": "1.0.0",
+  "description": "RPG game engine with WebGL Client and Node server.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sygmajji/o-rpg.git"
+  },
+  "keywords": [
+    "RPG"
+  ],
+  "author": {
+    "name": "Charles Mattei",
+    "email": "sygmajji@gmail.com"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sygmajji/o-rpg/issues"
+  },
+  "homepage": "https://github.com/sygmajji/o-rpg#readme"
+}
