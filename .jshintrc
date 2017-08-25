@@ -1,0 +1,16 @@
+{
+    "asi": true,
+    "forin": false,
+    "freeze": true,
+    "latedef": true,
+    "nonbsp": true,
+    "nonew": true,
+    "undef": true,
+    "unused": true,
+    "predef" : [
+        "console",
+        "requestAnimationFrame",
+        "document"
+    ],
+    "debug": true
+}

@@ -2,9 +2,12 @@
   "name": "o-rpg",
   "version": "1.0.0",
   "description": "RPG game engine with WebGL Client and Node server.",
-  "main": "index.js",
+  "main": "o-rpg.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --reporter list",
+    "start": "node ./src/server/server",
+    "start-dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --open",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -21,5 +24,25 @@
   "bugs": {
     "url": "https://github.com/sygmajji/o-rpg/issues"
   },
-  "homepage": "https://github.com/sygmajji/o-rpg#readme"
+  "homepage": "https://github.com/sygmajji/o-rpg#readme",
+  "devDependencies": {
+    "css-loader": "^0.28.5",
+    "jshint": "^2.9.5",
+    "jshint-loader": "^0.8.4",
+    "mocha": "^3.5.0",
+    "nodemon": "^1.11.0",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.5.5",
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-dev-server": "^2.7.1",
+    "webpack-hot-middleware": "^2.18.2"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "randomcolor": "^0.5.3",
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.3",
+    "three": "^0.87.1"
+  }
 }
