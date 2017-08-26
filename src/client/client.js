@@ -47,3 +47,10 @@ var animate = function () {
 };
 
 animate()
+
+if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(function() {
+      //clearInterval(timer);
+    });
+  }

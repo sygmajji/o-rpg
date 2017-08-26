@@ -6,7 +6,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || "development";
 module.exports = {
   entry: [
     'webpack-hot-middleware/client',
-    './src/client/index.js'
+    './src/client/client.js'
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
