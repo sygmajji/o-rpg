@@ -1,20 +1,24 @@
-const path = require('path');
-var webpack = require('webpack');
+var path = require('path')
+var webpack = require('webpack')
+
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
 module.exports = {
   entry: [
-    './src/client/index.js',
-    'webpack-hot-middleware/client'
+    'webpack-hot-middleware/client',
+    './src/client/index.js'
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     publicPath: '/'
   },
-  devtool: 'inline-source-map',
-  devServer: {
-    port: 8080,
-    contentBase: './dist'
+  devtool: '#eval-source-map',
+  resolve: {
+    extensions: ['.js'],
+    alias: {
+      request: 'browser-request'
+    }
   },
   module: {
     rules: [
@@ -42,6 +46,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
 ]

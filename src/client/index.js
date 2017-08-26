@@ -22,8 +22,8 @@ socket.on('chat message', function(msg){
 
 // ThreeJS
 var myCanvas = document.getElementById('my_canvas');
-var width = 500;
-var height = 300;
+var width = 500
+var height = 300
 var THREE = require('three')
 var scene = new THREE.Scene()
 var camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 )
