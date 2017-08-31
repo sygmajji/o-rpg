@@ -9,8 +9,9 @@
     "unused": true,
     "predef" : [
         "console",
-        "requestAnimationFrame",
-        "document"
+        "$"
     ],
-    "debug": true
+    "debug": true,
+    "browser": true,
+    "esversion": 6
 }

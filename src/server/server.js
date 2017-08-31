@@ -54,6 +54,15 @@ watcher.on('ready', function() {
   });
 });
 
+// Do "hot-reloading" of client stuff on the server
+// Throw away the cached client modules and let them be re-required next time
+compiler.plugin('done', function() {
+  console.log("Clearing /client/ module cache from server");
+  Object.keys(require.cache).forEach(function(id) {
+    if (/[\/\\]client[\/\\]/.test(id)) delete require.cache[id];
+  });
+});
+
 server.listen(3000, function() {
   console.log( 'O-RPG listening on port 3000!' )
 })
