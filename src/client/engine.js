@@ -46,14 +46,23 @@ Engine.prototype.mainLoop = function () {
 }
 
 Engine.prototype.stop = function stop() {
-    console.log('[Engine] Stopping...')
+    console.log('[Engine] Stopping... ')
     cancelAnimationFrame(this.req)
     this.scene = null
     this.renderer = null
     this.camera = null
 }
 
+var engine = null
+
 module.exports = function (params) {
-    var engine = new Engine(params)
+    if (engine == null)
+        engine = new Engine(params)
     return engine
+}
+
+if (module.hot) {
+    module.hot.dispose(function() {
+        engine.stop()
+    })
 }

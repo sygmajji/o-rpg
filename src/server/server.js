@@ -50,16 +50,12 @@ io.on('connection', function(socket) {
   })
 })
 
-// Retrieve database
-var database = require('../db/database.js')()
-
 // Do "hot-reloading" of express stuff on the server
 // Throw away cached modules and re-require next time
 // Ensure there's no important state in there!
-var watcher = chokidar.watch('./src/server')
-
-watcher.on('ready', function() {
-  watcher.on('all', function() {
+var serverWatcher = chokidar.watch('./src/server')
+serverWatcher.on('ready', function() {
+  serverWatcher.on('all', function() {
     console.log("Clearing /server/ module cache from server")
     Object.keys(require.cache).forEach(function(id) {
       if (/[\/\\]server[\/\\]/.test(id)) delete require.cache[id]
@@ -69,19 +65,31 @@ watcher.on('ready', function() {
 
 // Do "hot-reloading" of client stuff on the server
 // Throw away the cached client modules and let them be re-required next time
-compiler.plugin('done', function() {
-  console.log("Clearing /client/ module cache from server")
-  Object.keys(require.cache).forEach(function(id) {
-    if (/[\/\\]client[\/\\]/.test(id)) delete require.cache[id]
-  })
-})
+// compiler.plugin('done', function() {
+//   console.log("Clearing /client/ module cache from server")
+//   Object.keys(require.cache).forEach(function(id) {
+//     if (/[\/\\]client[\/\\]/.test(id)) delete require.cache[id]
+//   })
+// })
 
-// Init database
-database.init(function() {
+// Retrieve database
+// var database = require('../db/database.js')(function() {
   server.listen(3000, function() {
     console.log( '[Server] Listening on port 3000!' )
   })
+// })
+
+var dbWatcher = chokidar.watch('./src/db')
+dbWatcher.on('ready', function() {
+  dbWatcher.on('all', function() {
+    console.log("Clearing /db/ module cache from server")
+    Object.keys(require.cache).forEach(function(id) {
+      if (/[\/\\]db[\/\\]/.test(id)) delete require.cache[id]
+    })
+    Object.keys(require.cache).forEach(function(id) {
+      if (/[\/\\]server[\/\\]/.test(id)) delete require.cache[id]
+    })
+    // Re require database
+    database = require('../db/database.js')()
+  })
 })
-
-
-

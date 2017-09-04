@@ -1,7 +1,10 @@
 var MongoClient = require('mongodb').MongoClient
+const EventEmitter = require('events');
+var readyList = new EventEmitter();
 
 var Database = function() {
     this.db = null
+    this.init()
 }
 
 Database.prototype.hello = function () {
@@ -13,9 +16,10 @@ Database.prototype.init = function (callback) {
         if (err) return console.log(err)
         this.db = database
         console.log("[Database] Connected to db")
-        if (typeof callback === 'function') {
-            callback()
-        }
+        // notify everyone else that the module is now ready
+        readyList.emit("ready");
+        // remove all listeners since this is a one-shot event
+        readyList.removeAllListeners("ready");
     })
 }
 
@@ -24,6 +28,9 @@ Database.prototype.getDB = function () {
 }
 
 var database = new Database()
-module.exports = function () {
+module.exports = function (callback) {
+    if (typeof callback === 'function')
+        readyList.on("ready", callback)
+
     return database
 }
