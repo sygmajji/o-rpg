@@ -15,9 +15,16 @@
       </div>
       <div class="messages_container">
         <ul id="messages"></ul>
-        <form action="">
+        <form id= "message" action="">
           <input id="m" autocomplete="off" /><button>Send</button>
         </form>
+      </div>
+      <div class="login">
+          <form action="/login" method="POST">
+            <input type="text" placeholder="name" name="name">
+            <input type="text" placeholder="password" name="password">
+            <button type="submit">Submit</button>
+          </form>
       </div>
     </div>
     <script src="./bundle.js"></script>

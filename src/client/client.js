@@ -6,7 +6,7 @@ var myColor = randColor()
 
 // SocketIO
 var socket = require('socket.io-client')()
-$('form').submit(function() {
+$('form#message').submit(function() {
     socket.emit('chat message', myColor+$('#m').val())
     $('#m').val('')
     return false
