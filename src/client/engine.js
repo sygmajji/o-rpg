@@ -1,4 +1,4 @@
-var THREE = require('three')
+import * as THREE from 'three'
 
 var Engine = function(params) {
     this.version = 0.1

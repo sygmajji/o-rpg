@@ -5,8 +5,9 @@
   "main": "o-rpg.js",
   "scripts": {
     "test": "mocha --reporter list",
-    "start": "node ./src/server/server",
-    "build": "webpack"
+    "dev": "node ./src/server/dev-server",
+    "build-dev": "webpack --config ./config/webpack.dev.conf.js",
+    "build-prod": "webpack --config ./config/webpack.prod.conf.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,10 @@
   },
   "homepage": "https://github.com/sygmajji/o-rpg#readme",
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.5",
     "file-loader": "^0.11.2",
     "imports-loader": "^0.7.1",
@@ -36,7 +41,9 @@
     "webpack": "^3.5.5",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-dev-server": "^2.7.1",
-    "webpack-hot-middleware": "^2.18.2"
+    "webpack-hot-middleware": "^2.18.2",
+    "webpack-merge": "^4.1.0",
+    "write-file-webpack-plugin": "^4.1.0"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
