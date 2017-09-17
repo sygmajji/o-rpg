@@ -15,9 +15,9 @@ var webpackConfig = merge(baseWebpackConfig, {
             }
         }),
         // Hot module replacement
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoEmitOnErrorsPlugin(),
+        // new webpack.optimize.OccurrenceOrderPlugin(),
+        // new webpack.HotModuleReplacementPlugin(),
+        // new webpack.NoEmitOnErrorsPlugin(),
         // Split vendor js into its own file
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',

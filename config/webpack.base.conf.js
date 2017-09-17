@@ -9,7 +9,7 @@ var WriteFilePlugin = require('write-file-webpack-plugin')
 module.exports = {
   entry: {
     app: [
-      'webpack-hot-middleware/client',
+      // 'webpack-hot-middleware/client',
       './src/client/client.js'
     ]
   },
