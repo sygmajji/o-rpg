@@ -27,7 +27,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/, // include .js files
+        test: /\.js$/, // .js files
         enforce: 'pre', // preload the jshint loader
         exclude: /node_modules/, // exclude any and all files in the node_modules folder
         use: [
@@ -67,7 +67,7 @@ module.exports = {
       jQuery: 'jquery'
     }),
     // Force writing files on disk and not on memory
-    new WriteFilePlugin(),
+    // new WriteFilePlugin(),
     // Copy assets files from source to dist folder
     new CopyWebpackPlugin([{
                 context: projectRoot,
