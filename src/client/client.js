@@ -1,4 +1,4 @@
-import '../../public/style.css';
+import '../../public/style.css'
 
 // Coloring
 import randColor from 'randomcolor'
@@ -27,7 +27,7 @@ var engine = new Engine({'color': myColor})
 engine.hello()
 engine.start()
 
-// import printMe from './print.js';
+// import printMe from './print.js'
 
 // if (module.hot) {
 //     module.hot.accept('./print.js', function() {

@@ -17,7 +17,7 @@ export default class Engine {
 
     start() {
         console.log('[Engine] Starting...')
-        var myCanvas = document.getElementById('my_canvas');
+        var myCanvas = document.getElementById('my_canvas')
         var width = 500
         var height = 300
         this.scene = new THREE.Scene()
@@ -35,7 +35,7 @@ export default class Engine {
     }
 
     mainLoop() {
-        var self = this;
+        var self = this
 
             var loop = function() {
                 self.req = requestAnimationFrame( loop )

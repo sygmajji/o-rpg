@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
 var path = require('path')
 
 /* GET home page. */
@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
 // })
 
 router.get('/test', (req, res) => {
-  res.send("You are a test");
+  res.send("You are a test")
 })
 
-module.exports = router;
+module.exports = router

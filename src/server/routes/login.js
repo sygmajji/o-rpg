@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
 var database = require('../../db/database.js')()
 
 router.post('/login', (req, res) => {
@@ -11,4 +11,4 @@ router.post('/login', (req, res) => {
     })
 })
 
-module.exports = router;
+module.exports = router

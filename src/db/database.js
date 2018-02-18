@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient
-const EventEmitter = require('events');
-var readyList = new EventEmitter();
+const EventEmitter = require('events')
+var readyList = new EventEmitter()
 
 var Database = function() {
     this.db = null
@@ -17,9 +17,9 @@ Database.prototype.init = function (callback) {
         this.db = database
         console.log("[Database] Connected to db")
         // notify everyone else that the module is now ready
-        readyList.emit("ready");
+        readyList.emit("ready")
         // remove all listeners since this is a one-shot event
-        readyList.removeAllListeners("ready");
+        readyList.removeAllListeners("ready")
     })
 }
 

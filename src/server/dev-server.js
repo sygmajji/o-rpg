@@ -1,16 +1,16 @@
 var path = require('path')
 var config = require('../../config/usagi.conf')
-var chokidar = require('chokidar');
+var chokidar = require('chokidar')
 var express = require('express')
 var bodyParser = require('body-parser')
 var app = express()
-var server = require('http').createServer(app);
+var server = require('http').createServer(app)
 var io = require('socket.io')(server)
 
 // Webpack config
 var webpack = require('webpack')
 var webpackConfig = require('../../config/webpack.dev.conf.js')
-var compiler = webpack(webpackConfig);
+var compiler = webpack(webpackConfig)
 
 // Body parser
 app.use(bodyParser.json())
@@ -49,7 +49,7 @@ io.on('connection', function(socket) {
 
   socket.on('chat message', function(msg) {
     console.log( '[Dev-Server] Message: ' + msg )
-    io.emit('chat message', msg);
+    io.emit('chat message', msg)
   })
 })
 
