@@ -1,8 +1,8 @@
-var MongoClient = require('mongodb').MongoClient
+let MongoClient = require('mongodb').MongoClient
 const EventEmitter = require('events')
-var readyList = new EventEmitter()
+let readyList = new EventEmitter()
 
-var Database = function() {
+let Database = function() {
     this.db = null
     this.init()
 }
@@ -27,7 +27,7 @@ Database.prototype.getDB = function () {
     return this.db
 }
 
-var database = new Database()
+let database = new Database()
 module.exports = function (callback) {
     if (typeof callback === 'function')
         readyList.on("ready", callback)

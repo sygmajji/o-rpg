@@ -2,11 +2,11 @@ import '../../public/style.css'
 
 // Coloring
 import randColor from 'randomcolor'
-var myColor = randColor()
+let myColor = randColor()
 
 // SocketIO
 import socketIO from 'socket.io-client'
-var socket = socketIO()
+let socket = socketIO()
 $('form#message').submit(function() {
     socket.emit('chat message', myColor+$('#m').val())
     $('#m').val('')
@@ -14,8 +14,8 @@ $('form#message').submit(function() {
 })
 
 socket.on('chat message', function(msg){
-    var color = msg.substr(0, 7)
-    var txt = msg.substr(7)
+    let color = msg.substr(0, 7)
+    let txt = msg.substr(7)
     if (txt == "")
         return
     $('#messages').append($('<li>').text(txt).css('color', color))
@@ -23,7 +23,7 @@ socket.on('chat message', function(msg){
 })
 
 import Engine from './engine'
-var engine = new Engine({'color': myColor})
+let engine = new Engine({'color': myColor})
 engine.hello()
 engine.start()
 

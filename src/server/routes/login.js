@@ -1,6 +1,6 @@
-var express = require('express')
-var router = express.Router()
-var database = require('../../db/database.js')()
+let express = require('express')
+let router = express.Router()
+let database = require('../../db/database.js')()
 
 router.post('/login', (req, res) => {
     database.hello()

@@ -1,16 +1,16 @@
-var path = require('path')
-var config = require('../../config/usagi.conf')
-var chokidar = require('chokidar')
-var express = require('express')
-var bodyParser = require('body-parser')
-var app = express()
-var server = require('http').createServer(app)
-var io = require('socket.io')(server)
+let path = require('path')
+let config = require('../../config/usagi.conf')
+let chokidar = require('chokidar')
+let express = require('express')
+let bodyParser = require('body-parser')
+let app = express()
+let server = require('http').createServer(app)
+let io = require('socket.io')(server)
 
 // Webpack config
-var webpack = require('webpack')
-var webpackConfig = require('../../config/webpack.dev.conf.js')
-var compiler = webpack(webpackConfig)
+let webpack = require('webpack')
+let webpackConfig = require('../../config/webpack.dev.conf.js')
+let compiler = webpack(webpackConfig)
 
 // Body parser
 app.use(bodyParser.json())
@@ -56,7 +56,7 @@ io.on('connection', function(socket) {
 // Do "hot-reloading" of express stuff on the server
 // Throw away cached modules and re-require next time
 // Ensure there's no important state in there!
-var serverWatcher = chokidar.watch('./src/server')
+let serverWatcher = chokidar.watch('./src/server')
 serverWatcher.on('ready', function() {
   serverWatcher.on('all', function() {
     console.log('[Dev-Server] Clearing /server/ module cache from server')
@@ -76,13 +76,13 @@ serverWatcher.on('ready', function() {
 // })
 
 // Retrieve database
-// var database = require('../db/database.js')(function() {
+// let database = require('../db/database.js')(function() {
   server.listen(config.dev.port, function() {
     console.log( '[Dev-Server] Listening on port '+ config.dev.port + '!' )
   })
 // })
 
-var dbWatcher = chokidar.watch('./src/db')
+let dbWatcher = chokidar.watch('./src/db')
 dbWatcher.on('ready', function() {
   dbWatcher.on('all', function() {
     console.log('[Dev-Server] Clearing /db/ module cache from server')
