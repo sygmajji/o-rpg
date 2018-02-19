@@ -1,10 +1,10 @@
-var path = require('path')
-var baseWebpackConfig = require('./webpack.base.conf')
-var merge = require('webpack-merge')
-var config = require('./usagi.conf')
-var webpack = require('webpack')
+const path = require('path')
+const baseWebpackConfig = require('./webpack.base.conf')
+const merge = require('webpack-merge')
+const config = require('./usagi.conf')
+const webpack = require('webpack')
 
-var webpackConfig = merge(baseWebpackConfig, {
+let webpackConfig = merge(baseWebpackConfig, {
     plugins: [
         // Uglify js
         new webpack.optimize.UglifyJsPlugin({

@@ -1,8 +1,8 @@
-var path = require('path')
-var webpack = require('webpack')
-var projectRoot = path.resolve(__dirname, '../')
-var CopyWebpackPlugin = require('copy-webpack-plugin')
-var WriteFilePlugin = require('write-file-webpack-plugin')
+const path = require('path')
+const webpack = require('webpack')
+const projectRoot = path.resolve(__dirname, '../')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const WriteFilePlugin = require('write-file-webpack-plugin')
 
 // process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
