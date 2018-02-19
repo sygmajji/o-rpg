@@ -1,3 +1,4 @@
+// @ts-check
 const path = require('path')
 const config = require('../../config/usagi.conf')
 const chokidar = require('chokidar')
@@ -19,7 +20,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // Tell express to use the webpack-dev-middleware and use the webpack.config.js
 // configuration file as a base.
 app.use(require("webpack-dev-middleware")(compiler, {
-    noInfo: true,
     publicPath: webpackConfig.output.publicPath,
     stats: {
       colors: true,
@@ -76,11 +76,11 @@ serverWatcher.on('ready', function() {
 // })
 
 // Retrieve database
-// let database = require('../db/database.js')(function() {
+let database = require('../db/database.js')(function() {
   server.listen(config.dev.port, function() {
     console.log( '[Dev-Server] Listening on port '+ config.dev.port + '!' )
   })
-// })
+})
 
 let dbWatcher = chokidar.watch('./src/db')
 dbWatcher.on('ready', function() {

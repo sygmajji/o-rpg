@@ -1,3 +1,4 @@
+// @ts-check
 import '../../public/style.css'
 
 // Coloring

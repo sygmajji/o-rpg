@@ -1,3 +1,4 @@
+// @ts-check
 const MongoClient = require('mongodb').MongoClient
 const EventEmitter = require('events')
 const readyList = new EventEmitter()
