@@ -24,22 +24,8 @@ socket.on('chat message', function(msg){
 })
 
 import Engine from './engine'
-let engine = new Engine({'color': myColor})
+let engine = new Engine({'color': myColor, 'rootDiv': 'canvas_container'})
 engine.hello()
 engine.start()
 
 // import printMe from './print.js'
-
-// if (module.hot) {
-//     module.hot.accept('./print.js', function() {
-//        console.log('[Client] Accepting the updated printMe module!')
-//          printMe()
-//     })
-//     module.hot.accept('./engine.js', function() {
-//         console.log('[Client] Accepting the updated engine module!')
-//         engine.stop()
-//         engine = new Engine({'color': myColor})
-//         engine.hello()
-//         engine.start()
-//     })
-// }
