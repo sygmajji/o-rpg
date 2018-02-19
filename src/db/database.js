@@ -1,6 +1,6 @@
-let MongoClient = require('mongodb').MongoClient
+const MongoClient = require('mongodb').MongoClient
 const EventEmitter = require('events')
-let readyList = new EventEmitter()
+const readyList = new EventEmitter()
 
 let Database = function() {
     this.db = null

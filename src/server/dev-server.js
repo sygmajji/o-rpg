@@ -1,16 +1,16 @@
-let path = require('path')
-let config = require('../../config/usagi.conf')
-let chokidar = require('chokidar')
-let express = require('express')
-let bodyParser = require('body-parser')
-let app = express()
-let server = require('http').createServer(app)
-let io = require('socket.io')(server)
+const path = require('path')
+const config = require('../../config/usagi.conf')
+const chokidar = require('chokidar')
+const express = require('express')
+const bodyParser = require('body-parser')
+const app = express()
+const server = require('http').createServer(app)
+const io = require('socket.io')(server)
 
 // Webpack config
-let webpack = require('webpack')
-let webpackConfig = require('../../config/webpack.dev.conf.js')
-let compiler = webpack(webpackConfig)
+const webpack = require('webpack')
+const webpackConfig = require('../../config/webpack.dev.conf.js')
+const compiler = webpack(webpackConfig)
 
 // Body parser
 app.use(bodyParser.json())
