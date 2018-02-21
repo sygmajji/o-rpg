@@ -9,11 +9,11 @@ let webpackConfig = merge(baseWebpackConfig, {
     devtool: 'inline-source-map',
     plugins: [
         // Uglify js
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
-        }),
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         warnings: false
+        //     }
+        // }),
         // Hot module replacement
         // new webpack.optimize.OccurrenceOrderPlugin(),
         // new webpack.HotModuleReplacementPlugin(),
