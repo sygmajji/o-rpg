@@ -2,3 +2,4 @@ node_modules/
 dist/*.js
 .DS_Store
 .tags
+config/local.conf.js

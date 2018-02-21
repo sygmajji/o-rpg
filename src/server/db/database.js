@@ -1,5 +1,8 @@
 // @ts-check
 const MongoClient = require('mongodb').MongoClient
+const mongoose = require('mongoose')
+const localConf = require('../../../config/local.conf')
+
 // const EventEmitter = require('events')
 // const readyList = new EventEmitter()
 
@@ -14,23 +17,19 @@ class Database {
   }
 
   connect(callback) {
-    MongoClient.connect('mongodb://admin:FNCftw17@ds123124.mlab.com:23124/o-rpg', (err, client) => {
-      if (err) return console.log(err)
-      this._db = client.db('o-rpg')
-      
-      const collection = this._db.collection('accounts')
-      // console.log(collection)/
-      console.log("[Database] Connected to db")
-      // notify everyone else that the module is now ready
-      // readyList.emit("ready")
-      // remove all listeners since this is a one-shot event
-      // readyList.removeAllListeners("ready")
+    // Set up default mongoose connection
+    let dbAddresss = 'mongodb://' + localConf.dbid + ':' + localConf.dbpass + '@' + localConf.url + '/' + localConf.dbname
+    mongoose.connect(dbAddresss)
 
-      // readyList.on("ready", callback)
-      if (callback !== undefined && typeof callback === 'function') {
-        callback();
-      }
-    })
+    // Get Mongoose to use the global promise library
+    mongoose.Promise = global.Promise
+
+    // Get the default connection
+    this._db = mongoose.connection
+
+    // Bind connection to error event (to get notification of connection errors)
+    this._db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
   }
 
   getDB() {
