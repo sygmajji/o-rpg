@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
+const database = require('./db/database')
 
 // Webpack config
 const webpack = require('webpack')
@@ -29,7 +30,7 @@ app.use(require("webpack-dev-middleware")(compiler, {
 app.use(require("webpack-hot-middleware")(compiler))
 
 // Serve public files
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Include server routes as a middleware
 app.use(function(req, res, next) {
@@ -68,17 +69,23 @@ serverWatcher.on('ready', function() {
 
 // Do "hot-reloading" of client stuff on the server
 // Throw away the cached client modules and let them be re-required next time
-// compiler.plugin('done', function() {
-//   console.log("Clearing /client/ module cache from server")
-//   Object.keys(require.cache).forEach(function(id) {
-//     if (/[\/\\]client[\/\\]/.test(id)) delete require.cache[id]
-//   })
-// })
+compiler.plugin('done', function() {
+  console.log("Clearing /client/ module cache from server")
+  Object.keys(require.cache).forEach(function(id) {
+    if (/[\/\\]client[\/\\]/.test(id)) delete require.cache[id]
+  })
+})
 
 // Retrieve database
-let database = require('../db/database.js')(function() {
-  server.listen(config.dev.port, function() {
-    console.log( '[Dev-Server] Listening on port '+ config.dev.port + '!' )
+// let database = require('../db/database.js')(function() {
+//   server.listen(config.dev.port, function() {
+//     console.log( '[Dev-Server] Listening on port '+ config.dev.port + '!' )
+//   })
+// })
+database.connect(() => {
+  console.log('!!!! conneceted to db')
+    server.listen(config.dev.port, function() {
+      console.log( '[Dev-Server] Listening on port '+ config.dev.port + '!' )
   })
 })
 
@@ -92,7 +99,7 @@ dbWatcher.on('ready', function() {
     Object.keys(require.cache).forEach(function(id) {
       if (/[\/\\]server[\/\\]/.test(id)) delete require.cache[id]
     })
-    // Re require database
-    database = require('../db/database.js')()
+    // // Re require database
+    // database = require('../db/database.js')()
   })
 })

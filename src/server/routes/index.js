@@ -5,7 +5,7 @@ const path = require('path')
 
 /* GET home page. */
 router.get('/', function (req, res) {
-  res.sendFile( path.join ( __dirname, '../../../dist', 'index.html') )
+  res.sendFile( path.join ( __dirname, '../views', 'index.html') )
 })
 
 // router.get('/bundle.js', function (req, res) {
