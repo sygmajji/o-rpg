@@ -18,8 +18,8 @@ class Database {
 
   connect(callback) {
     // Set up default mongoose connection
-    let dbAddresss = 'mongodb://' + localConf.dbid + ':' + localConf.dbpass + '@' + localConf.url + '/' + localConf.dbname
-    mongoose.connect(dbAddresss)
+    let dbAddress = 'mongodb://' + localConf.dbid + ':' + localConf.dbpass + '@' + localConf.dburl + '/' + localConf.dbname
+    mongoose.connect(dbAddress)
 
     // Get Mongoose to use the global promise library
     mongoose.Promise = global.Promise
