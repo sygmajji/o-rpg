@@ -41,10 +41,10 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-            compact: true,
-            presets: [
-                ['env']
-            ]
+          compact: true,
+          presets: [
+            ['env']
+          ]
         }
       },
       {
@@ -69,12 +69,12 @@ module.exports = {
     // Force writing files on disk and not on memory
     // new WriteFilePlugin(),
     // Copy assets files from source to dist folder
-    new CopyWebpackPlugin([{
-                context: projectRoot,
-                from: 'src/assets',
-                to: 'assets/',
-            }
-        ]
+    new CopyWebpackPlugin([
+      {
+        context: projectRoot,
+        from: 'src/assets',
+        to: 'assets/',
+      }]
     ),
   ]
 };
