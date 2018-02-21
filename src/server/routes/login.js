@@ -1,7 +1,7 @@
 // @ts-check
 const express = require('express')
 const router = express.Router()
-const database = require('../../db/database')
+const database = require('../db/database')
 
 router.post('/login', (req, res) => {
     database.hello()
