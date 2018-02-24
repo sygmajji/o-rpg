@@ -100,19 +100,6 @@ io.on('connection', function(socket) {
 //   })
 // })
 
-// Retrieve database
-// let database = require('../db/database.js')(function() {
-//   server.listen(config.dev.port, function() {
-//     console.log( '[Dev-Server] Listening on port '+ config.dev.port + '!' )
-//   })
-// })
-database.connect(() => {
-  console.log('!!!! conneceted to db')
-    server.listen(config.dev.port, function() {
-      console.log( '[Dev-Server] Listening on port '+ config.dev.port + '!' )
-  })
-})
-
 // let dbWatcher = chokidar.watch('./src/db')
 // dbWatcher.on('ready', function() {
 //   dbWatcher.on('all', function() {
@@ -127,3 +114,19 @@ database.connect(() => {
 //     // database = require('../db/database.js')()
 //   })
 // })
+
+// Retrieve database
+let promise = database.connect()
+promise.then(
+  // Success
+  () => {
+    server.listen(config.dev.port, function() {
+      console.log('[Dev-Server] Listening on port '+ config.dev.port + '!')
+    })
+  },
+  // Error
+  err => {
+    console.log('[Dev-Server] Could not connect to database.', err)
+  }
+)
+

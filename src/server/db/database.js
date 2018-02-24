@@ -19,7 +19,7 @@ class Database {
   connect(callback) {
     // Set up default mongoose connection
     let dbAddress = 'mongodb://' + localConf.dbid + ':' + localConf.dbpass + '@' + localConf.dburl + '/' + localConf.dbname
-    mongoose.connect(dbAddress)
+    let promise = mongoose.connect(dbAddress)
 
     // Get Mongoose to use the global promise library
     mongoose.Promise = global.Promise
@@ -30,6 +30,7 @@ class Database {
     // Bind connection to error event (to get notification of connection errors)
     this._db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+    return promise
   }
 
   getDB() {
