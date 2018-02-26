@@ -7,7 +7,8 @@
     "test": "mocha --reporter list",
     "start": "node ./src/server/dev-server",
     "build-dev": "webpack --config ./config/webpack.dev.conf.js",
-    "build-prod": "webpack --config ./config/webpack.prod.conf.js"
+    "build-prod": "webpack --config ./config/webpack.prod.conf.js",
+    "populate": "node ./src/server/db/populate"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   },
   "homepage": "https://github.com/sygmajji/o-rpg#readme",
   "devDependencies": {
+    "async": "^2.6.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
