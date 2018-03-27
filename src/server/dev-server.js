@@ -3,6 +3,7 @@ const path = require('path')
 const config = require('../../config/usagi.conf')
 const chokidar = require('chokidar')
 const express = require('express')
+const session = require('express-session')
 const favicon = require('serve-favicon')
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
@@ -23,6 +24,14 @@ app.set('views', path.join(__dirname, 'src/server/views'))
 
 // Logger
 app.use(logger('dev'))
+
+// Session
+app.use(session({
+  secret: 'usagi gambare',
+  resave: true,
+  saveUninitialized: false,
+  cookie: { secure: false } // TODO need https
+}));
 
 // Body parser
 app.use(bodyParser.json())
@@ -49,6 +58,12 @@ app.use(function(req, res, next) {
 })
 app.use(function(req, res, next) {
   require('./routes/login.js')(req, res, next)
+})
+app.use(function(req, res, next) {
+  require('./routes/logout.js')(req, res, next)
+})
+app.use(function(req, res, next) {
+  require('./routes/register.js')(req, res, next)
 })
 
 // Catch 404 and forward to error handler

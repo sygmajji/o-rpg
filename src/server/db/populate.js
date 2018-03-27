@@ -3,57 +3,52 @@
 console.log('This script populates the database')
 
 const async = require('async')
-const SomeModel = require('./models/somemodel')
+const Account = require('./models/account')
 const localConf = require('../../../config/local.conf')
 const mongoose = require('mongoose')
 
 let dbAddress = 'mongodb://' + localConf.dbid + ':' + localConf.dbpass + '@' + localConf.dburl + '/' + localConf.dbname
 mongoose.connect(dbAddress)
 mongoose.Promise = global.Promise
-var db = mongoose.connection
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
-var somemodels = []
+// TODO fix errors
+// Create accounts
+var accounts = []
+function accountCreate(email, name, pass, date, cb) {
+  let accountDetails = { email: email, username: name, password: pass, creationDate: date }
+  var account = new Account(accountDetails)
 
-function somemodelCreate(name, date, cb) {
-  var smDetails = { name: name, date: date }
-  var sm = new SomeModel(smDetails)
-
-  sm.save(function (err) {
+  account.save(function (err) {
     if (err) {
       cb(err, null)
+      console.log(err)
       return
     }
-    console.log('New model: ' + sm)
-    somemodels.push(sm)
-    cb(null, sm)
+    console.log('New account: ' + account)
+    accounts.push(account)
+    cb(null, account)
   })
+
+  cb(null, account)
 }
 
-function createGenreAuthors(cb) {
+function createTestAccounts(cb) {
   async.parallel([
     function(callback) {
-      somemodelCreate('Bob', new Date(), callback)
+      accountCreate('bob@silmaris.org', 'Bob', 'toto', new Date(), callback)
     },
     function(callback) {
-      somemodelCreate('Ben', new Date(), callback)
+      accountCreate('jim@silmaris.org', 'Jim', 'toto', new Date(), callback)
     },
     function(callback) {
-      somemodelCreate('Isaac', new Date(), callback)
+      accountCreate('bobby@silmaris.org', 'Bobby', 'toto', new Date(), callback)
     },
-    function(callback) {
-      somemodelCreate('Bob', new Date(), callback)
-    },
-    function(callback) {
-      somemodelCreate('Jim', new Date(), callback)
-    },
-  ],
-  // optional callback
-  cb)
+  ], cb)
 }
 
 async.series([
-  createGenreAuthors
+  createTestAccounts
   // More here
 ],
 // Optional callback
@@ -63,7 +58,6 @@ function(err, results) {
   }
   else {
     console.log('Finished')
-    
   }
   // All done, disconnect from database
   mongoose.connection.close()

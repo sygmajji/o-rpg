@@ -2,7 +2,6 @@
 const MongoClient = require('mongodb').MongoClient
 const mongoose = require('mongoose')
 const localConf = require('../../../config/local.conf')
-const SomeModel = require('./models/somemodel')
 
 // const EventEmitter = require('events')
 // const readyList = new EventEmitter()
@@ -31,25 +30,8 @@ class Database {
     // Bind connection to error event (to get notification of connection errors)
     this._db.on('error', console.error.bind(console, 'MongoDB connection error:'))
     this._db.once('open', () => {
-      // this.saveEntry()
     })
     return promise
-  }
-
-  saveEntry() {
-    // Create an instance of model SomeModel
-    let awesome_instance = new SomeModel({ name: 'awesome', date: new Date() })
-
-    // Save the new model instance, passing a callback
-    awesome_instance.save(function (err) {
-      if (err) this.handleError(err)
-    })
-
-    // Change record by modifying the fields, then calling save().
-    awesome_instance.name = "New cool name"
-    awesome_instance.save((err) => {
-      if (err) return this.handleError(err)
-    })
   }
 
   handleError(err) {
@@ -60,7 +42,6 @@ class Database {
   getDB() {
     return this._db
   }
-
 }
 
 // Export database instance

@@ -18,12 +18,21 @@
           <input id="m" autocomplete="off" /><button>Send</button>
         </form>
       </div>
-      <div class="login">
-          <form action="/login" method="POST">
-            <input type="text" placeholder="name" name="name">
-            <input type="text" placeholder="password" name="password">
-            <button type="submit">Submit</button>
-          </form>
+      <div id="register">
+        <form action="/register" method="POST">
+          <input type="email" placeholder="Email" name="email" required>
+          <input type="text" placeholder="Name" name="username" required>
+          <input type="password" placeholder="Password" name="password" required>
+          <input type="password" placeholder="Confirm Password" name="passwordConf" required>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <div id="login">
+        <form action="/login" method="POST">
+          <input type="email" placeholder="Email" name="logemail" required>
+          <input type="password" placeholder="Password" name="logpassword" required>
+          <button type="submit">Submit</button>
+        </form>
       </div>
     </div>
     <script src="./manifest-bundle.js"></script>
