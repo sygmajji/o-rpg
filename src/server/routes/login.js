@@ -16,7 +16,6 @@ router.post('/login', (req, res, next) => {
         return next(err)
       } else {
         req.session.userId = user._id
-        console.log('login session', req.session)
         return res.redirect('/test')
       }
     })

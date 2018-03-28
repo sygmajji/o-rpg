@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 // @ts-check
-console.log('This script populates the database')
+console.log('[Populate] This script populates the database')
 
 const async = require('async')
 const Account = require('./models/account')
@@ -14,7 +14,7 @@ try {
 }
 catch (err) {
   localConf = {}
-  console.log("[Dev-Server] Unable to read file '" + localFilename + "': ", err)
+  console.log("[Populate] Unable to read file '" + localFilename + "': ", err)
 }
 
 let dbAddress = 'mongodb://' + localConf.dbid + ':' + localConf.dbpass + '@' + localConf.dburl + '/' + localConf.dbname
@@ -32,10 +32,10 @@ function accountCreate(email, name, pass, date, cb) {
   account.save(function (err) {
     if (err) {
       cb(err, null)
-      console.log(err)
+      console.log('[Populate]' + err)
       return
     }
-    console.log('New account: ' + account)
+    console.log('[Populate] New account: ' + account)
     accounts.push(account)
     cb(null, account)
   })
@@ -64,10 +64,10 @@ async.series([
 // Optional callback
 function(err, results) {
   if (err) {
-    console.log('Error: ' + err)
+    console.log('[Populate] Error: ' + err)
   }
   else {
-    console.log('Finished')
+    console.log('[Populate] Finished')
   }
   // All done, disconnect from database
   mongoose.connection.close()

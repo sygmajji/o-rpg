@@ -10,7 +10,7 @@ try {
 }
 catch (err) {
   localConf = {}
-  console.log("[Dev-Server] Unable to read file '" + localFilename + "': ", err)
+  console.log("[Database] Unable to read file '" + localFilename + "': ", err)
 }
 
 // const EventEmitter = require('events')
@@ -23,7 +23,7 @@ class Database {
     this._db = null
   }
   hello() {
-    console.log('Hello database')
+    console.log('[Database] Hello database')
   }
 
   connect() {
