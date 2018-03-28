@@ -1,7 +1,17 @@
 // @ts-check
 const MongoClient = require('mongodb').MongoClient
 const mongoose = require('mongoose')
-const localConf = require('../../../config/local.conf')
+
+// Retrieve local conf
+const localFilename = '../../../config/local.conf'
+let localConf
+try {
+  localConf = require(localFilename)
+}
+catch (err) {
+  localConf = {}
+  console.log("[Dev-Server] Unable to read file '" + localFilename + "': ", err)
+}
 
 // const EventEmitter = require('events')
 // const readyList = new EventEmitter()
@@ -16,7 +26,7 @@ class Database {
     console.log('Hello database')
   }
 
-  connect(callback) {
+  connect() {
     // Set up default mongoose connection
     let dbAddress = 'mongodb://' + localConf.dbid + ':' + localConf.dbpass + '@' + localConf.dburl + '/' + localConf.dbname
     let promise = mongoose.connect(dbAddress)

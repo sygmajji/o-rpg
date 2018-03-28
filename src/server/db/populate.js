@@ -4,8 +4,18 @@ console.log('This script populates the database')
 
 const async = require('async')
 const Account = require('./models/account')
-const localConf = require('../../../config/local.conf')
 const mongoose = require('mongoose')
+
+// Retrieve local conf
+const localFilename = '../../../config/local.conf'
+let localConf
+try {
+  localConf = require(localFilename)
+}
+catch (err) {
+  localConf = {}
+  console.log("[Dev-Server] Unable to read file '" + localFilename + "': ", err)
+}
 
 let dbAddress = 'mongodb://' + localConf.dbid + ':' + localConf.dbpass + '@' + localConf.dburl + '/' + localConf.dbname
 mongoose.connect(dbAddress)

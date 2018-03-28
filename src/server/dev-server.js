@@ -12,11 +12,24 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 const database = require('./db/database')
+const mongoose = require('mongoose')
+const MongoStore = require('connect-mongo')(session)
 
 // Webpack config
 const webpack = require('webpack')
 const webpackConfig = require('../../config/webpack.dev.conf.js')
 const compiler = webpack(webpackConfig)
+
+// Retrieve local conf
+const localFilename = '../../config/local.conf'
+let localConf
+try {
+  localConf = require(localFilename)
+}
+catch (err) {
+  localConf = {}
+  console.log("[Dev-Server] Unable to read file '" + localFilename + "': ", err)
+}
 
 // Set views
 app.set('views', path.join(__dirname, 'src/server/views'))
@@ -25,12 +38,17 @@ app.set('views', path.join(__dirname, 'src/server/views'))
 // Logger
 app.use(logger('dev'))
 
+// Retrieve database
+var db = mongoose.connection;
+
 // Session
 app.use(session({
-  secret: 'usagi gambare',
+  secret: localConf.sessionSecret,
   resave: true,
   saveUninitialized: false,
-  cookie: { secure: false } // TODO need https
+  store: new MongoStore({
+    mongooseConnection: db
+  })
 }));
 
 // Body parser
@@ -130,7 +148,7 @@ compiler.plugin('done', function() {
 //   })
 // })
 
-// Retrieve database
+// Wait for database and start server
 let promise = database.connect()
 promise.then(
   // Success
