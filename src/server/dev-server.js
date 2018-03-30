@@ -17,8 +17,16 @@ const MongoStore = require('connect-mongo')(session)
 
 // Webpack config
 const webpack = require('webpack')
+const middleware = require('webpack-dev-middleware');
 const webpackConfig = require('../../config/webpack.dev.conf.js')
 const compiler = webpack(webpackConfig)
+const instance = middleware(compiler, {
+  publicPath: webpackConfig.output.publicPath,
+  stats: {
+    colors: true,
+    chunks: false
+  }
+})
 
 // Retrieve local conf
 const localFilename = '../../config/local.conf'
@@ -33,6 +41,7 @@ catch (err) {
 
 // Set views
 app.set('views', path.join(__dirname, 'src/server/views'))
+// TODO add view engine
 // app.set('view engine', 'pug')
 
 // Logger
@@ -58,13 +67,7 @@ app.use(cookieParser())
 
 // Tell express to use the webpack-dev-middleware and use the webpack.config.js
 // configuration file as a base.
-app.use(require("webpack-dev-middleware")(compiler, {
-    publicPath: webpackConfig.output.publicPath,
-    stats: {
-      colors: true,
-      chunks: false
-    }
-}))
+app.use(instance)
 // app.use(require("webpack-hot-middleware")(compiler))
 
 // Serve public files
@@ -114,7 +117,7 @@ io.on('connection', function(socket) {
 // Do "hot-reloading" of express stuff on the server
 // Throw away cached modules and re-require next time
 // Ensure there's no important state in there!
-let serverWatcher = chokidar.watch('./src/server')
+let serverWatcher = chokidar.watch(path.join(__dirname, '/src/server'))
 serverWatcher.on('ready', function() {
   serverWatcher.on('all', function() {
     console.log('[Dev-Server] Clearing /server/ module cache from server')
@@ -124,15 +127,15 @@ serverWatcher.on('ready', function() {
   })
 })
 
+// TODO do we need that ?
 // Do "hot-reloading" of client stuff on the server
 // Throw away the cached client modules and let them be re-required next time
-compiler.plugin('done', function() {
-  console.log('[Dev-Server] Clearing /client/ module cache from server')
-  Object.keys(require.cache).forEach(function(id) {
-    if (/[\/\\]client[\/\\]/.test(id)) delete require.cache[id]
-  })
-})
-
+// compiler.hooks.done.tap('reloadPlugin', params => {
+//   console.log('[Dev-Server] Clearing /client/ module cache from server')
+//   Object.keys(require.cache).forEach(function(id) {
+//     if (/[\/\\]client[\/\\]/.test(id)) delete require.cache[id]
+//   })
+// })
 // let dbWatcher = chokidar.watch('./src/db')
 // dbWatcher.on('ready', function() {
 //   dbWatcher.on('all', function() {
@@ -148,18 +151,21 @@ compiler.plugin('done', function() {
 //   })
 // })
 
+let webpackPromise = new Promise((resolve, reject) => {
+  instance.waitUntilValid(() => {
+    resolve('loaded')
+  })
+  resolve()
+})
+
 // Wait for database and start server
-let promise = database.connect()
-promise.then(
-  // Success
+let dbPromise = database.connect()
+
+Promise.all([webpackPromise, dbPromise]).then(
   () => {
     server.listen(config.dev.port, function() {
       console.log('[Dev-Server] Listening on port '+ config.dev.port + '!')
     })
-  },
-  // Error
-  err => {
-    console.log('[Dev-Server] Could not connect to database.', err)
-  }
-)
-
+}, err => {
+  console.log('[Dev-Server] Could not connect to database.', err)
+});

@@ -2,8 +2,6 @@ const path = require('path')
 const webpack = require('webpack')
 const projectRoot = path.resolve(__dirname, '../')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const WriteFilePlugin = require('write-file-webpack-plugin')
-
 // process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
 module.exports = {
@@ -18,6 +16,18 @@ module.exports = {
     filename: '[name]-bundle.js',
     publicPath: '/'
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          chunks: "initial",
+          name: "vendors",
+          enforce: true
+        }
+      }
+    }
+  },
   resolve: {
     extensions: ['.js'],
     alias: {
@@ -26,16 +36,6 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.js$/, // .js files
-      //   enforce: 'pre', // preload the jshint loader
-      //   exclude: /node_modules/, // exclude any and all files in the node_modules folder
-      //   use: [
-      //     {
-      //       loader: 'jshint-loader'
-      //     }
-      //   ]
-      // },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -66,8 +66,6 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery'
     }),
-    // Force writing files on disk and not on memory
-    // new WriteFilePlugin(),
     // Copy assets files from source to dist folder
     new CopyWebpackPlugin([
       {

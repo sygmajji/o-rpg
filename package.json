@@ -36,18 +36,16 @@
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",
     "imports-loader": "^0.8.0",
-    "jshint": "^2.9.5",
-    "jshint-loader": "^0.8.4",
     "mocha": "^5.0.5",
     "nodemon": "^1.17.2",
     "style-loader": "^0.20.3",
     "url-loader": "^1.0.1",
-    "webpack": "^3.11.0",
-    "webpack-dev-middleware": "^2.0.6",
-    "webpack-dev-server": "^2.11.2",
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-middleware": "^3.1.0",
+    "webpack-dev-server": "^3.1.1",
     "webpack-hot-middleware": "^2.21.2",
-    "webpack-merge": "^4.1.2",
-    "write-file-webpack-plugin": "^4.2.0"
+    "webpack-merge": "^4.1.2"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
@@ -64,9 +62,9 @@
     "mongoose": "^5.0.12",
     "morgan": "^1.9.0",
     "randomcolor": "^0.5.3",
-    "serve-favicon": "^2.4.5",
-    "socket.io": "^2.0.4",
-    "socket.io-client": "^2.0.4",
+    "serve-favicon": "^2.5.0",
+    "socket.io": "^2.1.0",
+    "socket.io-client": "^2.1.0",
     "three": "^0.91.0"
   }
 }

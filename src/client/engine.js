@@ -21,7 +21,7 @@ class Engine {
   hello() {
     console.log('[Engine] Hello version: ' + this._version)
   }
-  
+
   /** Start engine. */
   start() {
     console.log('[Engine] Starting...')
@@ -34,17 +34,17 @@ class Engine {
     this._camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 )
     this._renderer = new THREE.WebGLRenderer( { canvas : this._canvas, antialias : true} )
     this._renderer.setSize( width, height )
-    
+
     let geometry = new THREE.BoxGeometry( 1, 1, 1 )
     let material = new THREE.MeshBasicMaterial( { color: this._color } )
     this._cube = new THREE.Mesh( geometry, material )
     this._scene.add( this._cube )
-    
+
     this._camera.position.z = 5
     // Start looping.
 		this._req = requestAnimationFrame(this.__mainLoop.bind(this))
   }
-  
+
   /** Main loop function.
 	 * @package */
   __mainLoop() {
@@ -55,7 +55,7 @@ class Engine {
     // Tell the browser to give us another frame.
     this._req = requestAnimationFrame(this._thisLoop)
   }
-  
+
   /** Stop engine. */
   stop() {
     console.log('[Engine] Stopping... ')
