@@ -1,0 +1,7 @@
+{
+  "editor.autoIndent": false,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "all",
+  "files.trimTrailingWhitespace": true
+}
