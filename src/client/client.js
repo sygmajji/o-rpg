@@ -1,12 +1,16 @@
 // @ts-check
+import Vue from 'vue'
 import '../../public/style.css'
 
 // Coloring
 import randColor from 'randomcolor'
+import Engine from './engine/engine'
+import socketIO from 'socket.io-client'
+
+// Choose color
 let myColor = randColor()
 
 // SocketIO
-import socketIO from 'socket.io-client'
 let socket = socketIO()
 $('form#message').submit(function() {
     socket.emit('chat message', myColor+$('#m').val())
@@ -23,9 +27,18 @@ socket.on('chat message', function(msg){
 
 })
 
-import Engine from './engine'
+// Instantiate engine
 let engine = new Engine({'color': myColor, 'rootDiv': 'canvas_container'})
 engine.hello()
 engine.start()
 
+// TODO temp test
 // import printMe from './print.js'
+
+// Create UI
+var app = new Vue({
+  el: '#ui',
+  data: {
+    message: 'Hello Vue!'
+  }
+})

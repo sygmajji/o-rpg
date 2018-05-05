@@ -2,37 +2,39 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>O-RPG</title>
   </head>
   <body>
-    <div class="header">
-      <div class="logo"></div>
-      <h1>Usagi</h1>
-    </div>
-    <div class = "container">
-      <div id="canvas_container">
-      </div>
-      <div class="messages_container">
-        <ul id="messages"></ul>
-        <form id= "message" action="">
-          <input id="m" autocomplete="off" /><button>Send</button>
-        </form>
-      </div>
-      <div id="register">
-        <form action="/register" method="POST">
-          <input type="email" placeholder="Email" name="email" required>
-          <input type="text" placeholder="Name" name="username" required>
-          <input type="password" placeholder="Password" name="password" required>
-          <input type="password" placeholder="Confirm Password" name="passwordConf" required>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-      <div id="login">
-        <form action="/login" method="POST">
-          <input type="email" placeholder="Email" name="logemail" required>
-          <input type="password" placeholder="Password" name="logpassword" required>
-          <button type="submit">Submit</button>
-        </form>
+    <div class="container">
+      <div id="canvas_container"></div>
+      <div id="ui">
+        <div class="header">
+          <div class="logo"></div>
+          <h1>Usagi</h1>
+        </div>
+        {{message}}
+        <div class="messages_container">
+          <ul id="messages"></ul>
+          <form id= "message" action="">
+            <input id="m" autocomplete="off" /><button>Send</button>
+          </form>
+        </div>
+        <div id="register">
+          <form action="/register" method="POST">
+            <input type="email" placeholder="Email" name="email" required>
+            <input type="text" placeholder="Name" name="username" required>
+            <input type="password" placeholder="Password" name="password" required>
+            <input type="password" placeholder="Confirm Password" name="passwordConf" required>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+        <div id="login">
+          <form action="/login" method="POST">
+            <input type="email" placeholder="Email" name="logemail" required>
+            <input type="password" placeholder="Password" name="logpassword" required>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
       </div>
     </div>
     <script src="./vendors-bundle.js"></script>

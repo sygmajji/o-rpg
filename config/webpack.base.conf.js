@@ -1,8 +1,17 @@
 const path = require('path')
 const webpack = require('webpack')
 const projectRoot = path.resolve(__dirname, '../')
+const distFolder =  path.resolve(projectRoot, 'dist')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+
 // process.env.NODE_ENV = process.env.NODE_ENV || "development";
+
+
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
 
 module.exports = {
   entry: {
@@ -12,7 +21,7 @@ module.exports = {
     ]
   },
   output: {
-    path: path.resolve(projectRoot, 'dist'),
+    path: distFolder,
     filename: '[name]-bundle.js',
     publicPath: '/'
   },
@@ -31,25 +40,29 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     alias: {
-      request: 'browser-request'
+      request: 'browser-request',
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': resolve('src')
     }
   },
   module: {
     rules: [
       {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          compact: true,
-          presets: [
-            ['env']
-          ]
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['babel-preset-env']          }
         }
       },
       {
         test: /.css$/,
-        use: ['style-loader', 'css-loader'] // Applied from the right to the left (shortcut for full definition)
+        use: ['vue-style-loader', 'style-loader', 'css-loader'] // Applied from the right to the left (shortcut for full definition)
       },
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
@@ -66,6 +79,7 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery'
     }),
+    new VueLoaderPlugin(),
     // Copy assets files from source to dist folder
     new CopyWebpackPlugin([
       {
