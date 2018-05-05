@@ -1,7 +1,7 @@
 // @ts-check
 // Require Mongoose
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 // Define a schema
 let Schema = mongoose.Schema
