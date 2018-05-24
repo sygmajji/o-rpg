@@ -1,5 +1,8 @@
 // @ts-check
 import Vue from 'vue'
+// @ts-ignore
+import App from './ui/App'
+import router from './ui/router'
 import '../../public/style.css'
 
 // Coloring
@@ -36,9 +39,9 @@ engine.start()
 // import printMe from './print.js'
 
 // Create UI
-var app = new Vue({
-  el: '#ui',
-  data: {
-    message: 'Hello Vue!'
-  }
+new Vue({
+  el: '#app',
+  router,
+  components: { App },
+  template: '<App/>'
 })

@@ -38,7 +38,7 @@ module.exports = {
     }
   },
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.vue', '.json'],
     alias: {
       request: 'browser-request',
       'vue$': 'vue/dist/vue.esm.js',
@@ -74,12 +74,12 @@ module.exports = {
     ]
   },
   plugins: [
+    new VueLoaderPlugin(),
     // Always provide plugins
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
     }),
-    new VueLoaderPlugin(),
     // Copy assets files from source to dist folder
     new CopyWebpackPlugin([
       {
